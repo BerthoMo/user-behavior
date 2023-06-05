@@ -6,29 +6,27 @@ A bank performed a marketing campaign to track and predict the user behaviour. I
 - [Installation](#installation)
 - [API Usage](#apiusage)
 - [Project Structure](#project-structure)
-- [Scripts](#scripts)
 
 
 ## Installation
 How to clone repository, install the environment and include source data
-
-### Download source data
-Download test_file.xlsx and train_file.xlsx and put it into the data/raw_data/ subfolder.
 
 ### Pull the repository
 ```
 git clone https://github.com/BerthoMo/user-behavior.git
 cd user-behavior 
 ```
-
 ### Install environment using conda and open jupyter notebook
 I recommend to use Anaconda as a package manager: https://docs.anaconda.com/free/anaconda/install/
 
 ```
-conda env create --name ml_task --file environment.yml 
-conda activate ml_task 
+conda env create --name ml_training --file environment.yml 
+conda activate ml_training 
 jupyter-notebook 
 ```
+
+### Optional: Download source data - needed if you want to run the notebooks
+Download test_file.xlsx and train_file.xlsx and put it into the data/raw_data/ subfolder.
 
 ## API Usage
 
@@ -103,6 +101,7 @@ Output:
 
 The two important notebooks are:
 - EDA & Preprocessing.ipynb
+    - contains feature mappings, unknown variable imputations and other interesting findings about the data
 - Model Training & Selection, Feature Importance and Test Submission.ipynb
 
 

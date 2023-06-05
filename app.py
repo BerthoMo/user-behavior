@@ -12,7 +12,7 @@ app = FastAPI()
 model = load("models/GBC.joblib")
 imputer = load("models/KNNimputer.joblib")
 
-
+# Define the input and output data types
 class InputData(BaseModel):
     age: int
     job: str
@@ -31,7 +31,6 @@ class InputData(BaseModel):
         
         
 class OutputData(BaseModel):
-    # Define the output data structure
     prediction: int
     probability: float
 
@@ -56,8 +55,7 @@ def encode_data(data):
        'job_student', 'job_technician', 'job_unemployed', 'job_unknown',
        'default_no', 'default_unknown', 'default_yes', 'housing_no',
        'housing_unknown', 'housing_yes', 'loan_no', 'loan_unknown', 'loan_yes',
-       'poutcome_failure', 'poutcome_nonexistent', 'poutcome_success',
-       'season']
+       'poutcome_failure', 'poutcome_nonexistent', 'poutcome_success']
 
     # Perform one-hot encoding on data
     encoded_df = pd.get_dummies(df, columns=one_hot_cols)
@@ -71,10 +69,9 @@ def encode_data(data):
     encoded_df['education'] = encoded_df['education'].map(category_mapping_education)
     encoded_df['marital'] = encoded_df['marital'].map(category_mapping_marital)
     encoded_df['contact'] = encoded_df['contact'].map(category_mapping_contact)
-
     return encoded_df
 
-def impute_df(df):
+def impute_df(df): # imputes unknown data points
     imputed_array = imputer.transform(df.replace('unknown', np.nan))
     imputed_df = pd.DataFrame(imputed_array, columns=df.columns)
     season_mapping = {4:0,5:0,6:0,7:0, 0:1,1:1,2:1,3:1,8:1,9:1,10:1,11:1}
